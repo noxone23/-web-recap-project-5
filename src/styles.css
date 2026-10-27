@@ -24,20 +24,31 @@ nav {
   bottom: 0;
   left: 0;
   display: flex;
-  justify-content: center;
-  gap: 1.5rem;
-  padding: 1rem;
   background: #222;
 }
 
 nav a {
-  color: #ccc;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  color: #222;
   text-decoration: none;
+  background: linear-gradient(to bottom, 
+    rgba(255, 255, 255, 0.4) 0%, 
+    rgba(255, 255, 255, 0.4) 50%, 
+    transparent 50%, 
+    transparent 100%
+  ), #dcdcdc;
+  border: 1px solid#999;
 }
 
 nav a.active {
+  background: #666666;
   color: white;
-  text-decoration: underline;
+  text-decoration: none;
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.3);
 }
 
 .art-list {
