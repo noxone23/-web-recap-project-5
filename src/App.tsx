@@ -4,6 +4,7 @@ import useSWR from "swr";
 import type { ArtPiece } from "./types";
 import "./styles.css";
 import ArtPieceList from "./ArtPieceList";
+import { Spotlight } from "./components/Spotlight/Spotlight";
 
 
 const url = "https://example-apis.vercel.app/api/art";
@@ -16,20 +17,11 @@ async function fetcher(apiUrl: string): Promise<ArtPiece[]> {
   return data;
 }
 
-function SpotlightPage() {
+function GalleryPage({ artPieces }: { artPieces: ArtPiece[] }) {
   return (
     <div>
-    <h2>Spotlight View</h2>
-    <p>Random Artwork</p>
-    </div>
-  );
-}
-
-function GalleryPage({ artPieces }: {artPieces: ArtPiece[] }) {
-  return (
-    <div>
-    <h2>Gallery View</h2>
-    <ArtPieceList artPieces={artPieces} />
+      <h2>Gallery View</h2>
+      <ArtPieceList artPieces={artPieces} />
     </div>
   );
 }
@@ -37,8 +29,8 @@ function GalleryPage({ artPieces }: {artPieces: ArtPiece[] }) {
 function FavoritesPage() {
   return (
     <div>
-    <h2>Favorites View</h2>
-    <p>Favorite Artworks</p>
+      <h2>Favorites View</h2>
+      <p>Favorite Artworks</p>
     </div>
   );
 }
@@ -46,31 +38,33 @@ function FavoritesPage() {
 function NotFoundPage() {
   return (
     <div>
-    <h2>Page not found</h2>
-    <p>The page does not existing</p>
+      <h2>Page not found</h2>
+      <p>The page does not existing</p>
     </div>
   );
 }
 
 export default function App() {
   const { data, error, isLoading } = useSWR<ArtPiece[]>(url, fetcher);
+
+  if (isLoading) return <p>Loading art pieces...</p>;
+  if (error) return <p>Failed to load art pieces.</p>;
+  if (!data) return null;
+
   return (
     <>
-    <main>
-      <h1>Art Gallery</h1>
+      <main>
+        <h1>Art Gallery</h1>
 
-      {isLoading && <p>Loading art pieces...</p>}
-      {error && <p>Failed to load art pieces.</p>}
+        <Routes>
+          <Route path="/" element={<Spotlight pieces={data} />} />
+          <Route path="/art-pieces" element={<GalleryPage artPieces={data} />} />
+          <Route path="/favorites" element={<FavoritesPage />} />
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
 
-      <Routes>
-        <Route path="/" element={<SpotlightPage />} />
-        <Route path="/art-pieces" element={data ? <GalleryPage artPieces={data} /> : null} />
-        <Route path="/favorites" element={<FavoritesPage />} />
-        <Route path="*" element={<NotFoundPage />} />
-      </Routes>
-      
-    </main>
-    <Navigation />
+      </main>
+      <Navigation />
     </>
   );
 }
