@@ -6,7 +6,7 @@ type ArtPiecePreviewProps = {
 
 export default function ArtPiecePreview({ artPiece }: ArtPiecePreviewProps) {
     return (
-        <article>
+        <article className="art-piece">
             <img src={artPiece.imageSource} alt={artPiece.name} />
             <h2>
                 {artPiece.name}

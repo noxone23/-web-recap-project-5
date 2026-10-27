@@ -53,7 +53,6 @@ export default function App() {
           <Route path="/favorites" element={<FavoritesPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
-
       </main>
       <Navigation />
     </>
