@@ -24,11 +24,11 @@ function SpotlightPage() {
   );
 }
 
-function GalleryPage() {
+function GalleryPage({ artPieces }: {artPieces: ArtPiece[] }) {
   return (
     <div>
     <h2>Gallery View</h2>
-    <p>List of all Artworks</p>
+    <ArtPieceList artPieces={artPieces} />
     </div>
   );
 }
@@ -58,15 +58,17 @@ export default function App() {
     <main>
       <h1>Art Gallery</h1>
 
+      {isLoading && <p>Loading art pieces...</p>}
+      {error && <p>Failed to load art pieces.</p>}
+
       <Routes>
         <Route path="/" element={<SpotlightPage />} />
-        <Route path="/art-pieces" element={<GalleryPage />} />
+        <Route path="/art-pieces" element={data ? <GalleryPage artPieces={data} /> : null} />
         <Route path="/favorites" element={<FavoritesPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
-      {isLoading && <p>Loading art pieces...</p>}
-      {error && <p>Failed to load art pieces.</p>}
-      {data && <ArtPieceList artPieces={data}/>}
+      
+      
     </main>
     <Navigation />
     </>
