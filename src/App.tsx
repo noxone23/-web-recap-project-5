@@ -1,6 +1,19 @@
 import { Routes, Route } from "react-router";
 import Navigation from "./components/Navigation/Navigation";
+import useSWR from "swr";
+import type { ArtPiece } from "./types";
 import "./styles.css";
+import ArtPieceList from "./ArtPieceList";
+
+const url = "https://example-apis.vercel.app/api/art";
+async function fetcher(url: string): Promise<ArtPiece[]> {
+  const response = await fetch(url);
+  if (!response.ok) {
+    throw new Error("Failed to fetch art pieces");
+  }
+  const data: ArtPiece[] = await response.json();
+  return data;
+}
 
 function SpotlightPage() {
   return (
@@ -39,6 +52,7 @@ function NotFoundPage() {
 }
 
 export default function App() {
+  const { data, error, isLoading } = useSWR<ArtPiece[]>(url, fetcher);
   return (
     <>
     <main>
@@ -50,6 +64,9 @@ export default function App() {
         <Route path="/favorites" element={<FavoritesPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
+      {isLoading && <p>Loading art pieces...</p>}
+      {error && <p>Failed to load art pieces.</p>}
+      {data && <ArtPieceList artPieces={data}/>}
     </main>
     <Navigation />
     </>
