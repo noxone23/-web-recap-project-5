@@ -5,9 +5,10 @@ import type { ArtPiece } from "./types";
 import "./styles.css";
 import ArtPieceList from "./ArtPieceList";
 
+
 const url = "https://example-apis.vercel.app/api/art";
-async function fetcher(url: string): Promise<ArtPiece[]> {
-  const response = await fetch(url);
+async function fetcher(apiUrl: string): Promise<ArtPiece[]> {
+  const response = await fetch(apiUrl);
   if (!response.ok) {
     throw new Error("Failed to fetch art pieces");
   }
@@ -67,7 +68,6 @@ export default function App() {
         <Route path="/favorites" element={<FavoritesPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
-      
       
     </main>
     <Navigation />
