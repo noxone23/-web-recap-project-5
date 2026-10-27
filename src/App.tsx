@@ -17,15 +17,6 @@ async function fetcher(apiUrl: string): Promise<ArtPiece[]> {
   return data;
 }
 
-function GalleryPage({ artPieces }: { artPieces: ArtPiece[] }) {
-  return (
-    <div>
-      <h2>Gallery View</h2>
-      <ArtPieceList artPieces={artPieces} />
-    </div>
-  );
-}
-
 function FavoritesPage() {
   return (
     <div>
@@ -58,7 +49,7 @@ export default function App() {
 
         <Routes>
           <Route path="/" element={<Spotlight pieces={data} />} />
-          <Route path="/art-pieces" element={<GalleryPage artPieces={data} />} />
+          <Route path="/art-pieces" element={<ArtPieceList artPieces={data} />} />
           <Route path="/favorites" element={<FavoritesPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
