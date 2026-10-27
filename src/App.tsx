@@ -5,9 +5,12 @@ import type { ArtPiece } from "./types";
 import "./styles.css";
 import ArtPieceList from "./ArtPieceList";
 import { Spotlight } from "./components/Spotlight/Spotlight";
-
-
+import ArtPieceDetails from "./Components/ArtPieceDetails/ArtPieceDetails";
 const url = "https://example-apis.vercel.app/api/art";
+
+
+
+
 async function fetcher(apiUrl: string): Promise<ArtPiece[]> {
   const response = await fetch(apiUrl);
   if (!response.ok) {
@@ -53,14 +56,16 @@ export default function App() {
 
   return (
     <>
-      <main>
+      <main> 
         <h1>Art Gallery</h1>
 
         <Routes>
           <Route path="/" element={<Spotlight pieces={data} />} />
           <Route path="/art-pieces" element={<GalleryPage artPieces={data} />} />
           <Route path="/favorites" element={<FavoritesPage />} />
+          <Route path="/art-pieces/:slug" element={<ArtPieceDetails artPieces={data} />} />
           <Route path="*" element={<NotFoundPage />} />
+
         </Routes>
 
       </main>
