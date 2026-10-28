@@ -1,6 +1,6 @@
 import { ArtPiece } from "../../types";
 import { useParams, Link } from "react-router";
-
+import ColorPalette from "../ColorPalette/ColorPalette";
 type ArtPieceDetailsProps = {
   artPieces: ArtPiece[];
 };
@@ -25,6 +25,7 @@ export default function ArtPieceDetails({ artPieces }: ArtPieceDetailsProps) {
        <p>{artPiece.artist}</p>
        <p>{artPiece.year}</p>
        <p>{artPiece.genre}</p>
+       <ColorPalette colors={artPiece.colors}/>
        <p>{artPiece.colors.join(", ")}</p>
        <Link to={`/art-pieces`}>Back to Gallery</Link>
        </article>
