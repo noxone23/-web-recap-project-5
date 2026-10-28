@@ -20,7 +20,7 @@ export default function ArtPiecePreview({ artPiece, artPiecesInfo,
   );
     return (
         <article className="art-piece">
-            <Link to={`./${artPiece.slug}`}>
+            <Link to={`/art-pieces/${artPiece.slug}`}>
             <img src={artPiece.imageSource} alt={artPiece.name} />
             </Link>
             <h2>
