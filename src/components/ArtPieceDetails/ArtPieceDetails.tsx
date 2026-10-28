@@ -1,5 +1,5 @@
 import { ArtPiece } from "../../types";
-import { useParams, Link } from "react-router";
+import { useParams } from "react-router";
 
 type ArtPieceDetailsProps = {
   artPieces: ArtPiece[];

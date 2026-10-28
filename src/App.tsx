@@ -5,7 +5,7 @@ import type { ArtPiece } from "./types";
 import "./styles.css";
 import ArtPieceList from "./ArtPieceList";
 import { Spotlight } from "./components/Spotlight/Spotlight";
-import ArtPieceDetails from "./components/ArtPieceDetails/ArtPieceDetails";
+import ArtPieceDetails from "./Components/ArtPieceDetails/ArtPieceDetails";
 const url = "https://example-apis.vercel.app/api/art";
 
 
