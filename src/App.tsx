@@ -92,7 +92,7 @@ export default function App() {
             }
           />
           <Route path="/favorites" element={<FavoritesPage />} />
-          <Route path="/art-pieces/:slug" element={<ArtPieceDetails artPieces={data} />} />
+          <Route path="/art-pieces/:slug" element={<ArtPieceDetails pieces={data} artPiecesInfo= {artPiecesInfo} onToggle={handleToggleFavorite} />} />
           <Route path="*" element={<NotFoundPage />} />
 
         </Routes>
