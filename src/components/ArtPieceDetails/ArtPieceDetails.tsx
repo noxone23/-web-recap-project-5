@@ -1,5 +1,6 @@
 import { ArtPiece } from "../../types";
 import { useParams, Link } from "react-router";
+import ColorPalette from "../ColorPalette/ColorPalette";
 import FavoriteButton from "../FavoriteButton/FavoriteButton";
 import { ArtPiecesInfo } from "../FavoriteButton/ArtPiecesInfo";
 type ArtPieceDetailsProps = {
@@ -28,20 +29,21 @@ export default function ArtPieceDetails({
   return (
     <main>
       <article className="art-piece">
-        <img src={artPiece.imageSource} alt="art piece image" />
-        <FavoriteButton
+       <img src={artPiece.imageSource} alt="art piece image" />
+         <FavoriteButton
           isFavorite={artPiecesInfo.some(
             (piece) => piece.slug === artPiece.slug && piece.isFavorite
           )}
           onToggle={() => onToggle(artPiece.slug)}
         />
-        <h1>{artPiece.name}</h1>
-        <p>{artPiece.artist}</p>
-        <p>{artPiece.year}</p>
-        <p>{artPiece.genre}</p>
-        <p>{artPiece.colors.join(", ")}</p>
-        <Link to={`/art-pieces`}>Back to Gallery</Link>
-      </article>
+       <h1>{artPiece.name}</h1>
+       <p>{artPiece.artist}</p>
+       <p>{artPiece.year}</p>
+       <p>{artPiece.genre}</p>
+       <ColorPalette colors={artPiece.colors}/>
+       <p>{artPiece.colors.join(", ")}</p>
+       <Link to={`/art-pieces`}>Back to Gallery</Link>
+       </article>
     </main>
   );
 }

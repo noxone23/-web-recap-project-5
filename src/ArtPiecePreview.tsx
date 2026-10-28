@@ -1,5 +1,5 @@
 import type { ArtPiece } from "./types";
-import ColorPalette from "./components/ColorPalette/ColorPalette";
+
 import { Link } from "react-router";
 
 import type { ArtPiecesInfo } from "./components/FavoriteButton/ArtPiecesInfo";
@@ -33,7 +33,7 @@ export default function ArtPiecePreview({ artPiece, artPiecesInfo,
         onToggle={() => onToggle(artPiece.slug)}
       />
 
-            <ColorPalette colors={artPiece.colors}/>
+            
         </article>
     )
 }
