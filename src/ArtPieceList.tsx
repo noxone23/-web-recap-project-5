@@ -14,8 +14,6 @@ export default function ArtPieceList({
 }: ArtPieceListProps) {
   return (
     <ul className="art-list">
-      {" "}
-      {}
       {artPieces.map((artPiece) => (
         <li key={artPiece.slug}>
           <ArtPiecePreview
