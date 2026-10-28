@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router";
 import useSWR from "swr";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import type { ArtPiece } from "./types";
 import "./styles.css";
 import Navigation from "./components/Navigation/Navigation";
@@ -9,6 +9,7 @@ import { Spotlight } from "./components/Spotlight/Spotlight";
 import { ArtPiecesInfo } from "./components/FavoriteButton/ArtPiecesInfo";
 import FavoritesPage from "./components/Favorites/FavoritesPage";
 import ArtPieceDetails from "./components/ArtPieceDetails/ArtPieceDetails";
+import { loadArtPieceInfo, savedArtPieceInfo } from "./utils/localStorage";
 
 const url = "https://example-apis.vercel.app/api/art";
 
@@ -37,7 +38,11 @@ function NotFoundPage() {
 
 export default function App() {
   const { data, error, isLoading } = useSWR<ArtPiece[]>(url, fetcher);
-  const [artPiecesInfo, setArtPiecesInfo] = useState<ArtPiecesInfo[]>([]);
+  const [artPiecesInfo, setArtPiecesInfo] = useState<ArtPiecesInfo[]>(loadArtPieceInfo);
+
+  useEffect(() => {
+    savedArtPieceInfo(artPiecesInfo);
+  }, [artPiecesInfo]);
 
   function handleToggleFavorite(slug: string) {
     setArtPiecesInfo((currentInfo) => {
