@@ -23,9 +23,14 @@ async function fetcher(apiUrl: string): Promise<ArtPiece[]> {
 
 function NotFoundPage() {
   return (
-    <div>
+    <div className="not-found-page">
+      <div className="art-piece">
       <h2>Page not found</h2>
-      <p>The page does not existing</p>
+      <img src="/not-found.png"
+      alt="Page not found illustration"
+      />
+      <p className="not-found-text"><strong>Artist:</strong> ChatDalí</p>
+      </div>
     </div>
   );
 }

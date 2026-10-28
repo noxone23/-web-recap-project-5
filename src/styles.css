@@ -174,6 +174,40 @@ nav a.active {
   margin-top: 0.75rem;
 }
 
+.not-found-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.not-found-page .art-piece {
+  width: 100%;
+  max-width: 48rem;
+  padding: 1.5rem;
+}
+
+.not-found-page h2 {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+}
+
+.not-found-page .art-piece img {
+  width: 100%;
+  height: auto;
+  max-height: 36rem;
+  object-fit: cover;
+  border-radius: 0.5rem;
+}
+
+.not-found-page .art-piece .not-found-text {
+  margin-top: 1.25rem;
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+  color: #444;
+}
+
 .comments {
   padding: 0;
   list-style: none;
