@@ -7,8 +7,13 @@ import ArtPieceList from "./ArtPieceList";
 import { Spotlight } from "./components/Spotlight/Spotlight";
 import { ArtPiecesInfo } from "./components/FavoriteButton/ArtPiecesInfo";
 import { useState } from "react";
+import ArtPieceDetails from "./components/ArtPieceDetails/ArtPieceDetails";
+
+
 
 const url = "https://example-apis.vercel.app/api/art";
+
+
 
 async function fetcher(apiUrl: string): Promise<ArtPiece[]> {
   const response = await fetch(apiUrl);
@@ -62,7 +67,7 @@ export default function App() {
 
   return (
     <>
-      <main>
+      <main> 
         <h1>Art Gallery</h1>
 
         <Routes>
@@ -87,7 +92,9 @@ export default function App() {
             }
           />
           <Route path="/favorites" element={<FavoritesPage />} />
+          <Route path="/art-pieces/:slug" element={<ArtPieceDetails artPieces={data} />} />
           <Route path="*" element={<NotFoundPage />} />
+
         </Routes>
       </main>
       <Navigation />
