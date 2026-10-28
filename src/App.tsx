@@ -5,9 +5,11 @@ import type { ArtPiece } from "./types";
 import "./styles.css";
 import ArtPieceList from "./ArtPieceList";
 import { Spotlight } from "./components/Spotlight/Spotlight";
-
+import { ArtPiecesInfo } from "./components/FavoriteButton/ArtPiecesInfo";
+import { useState } from "react";
 
 const url = "https://example-apis.vercel.app/api/art";
+
 async function fetcher(apiUrl: string): Promise<ArtPiece[]> {
   const response = await fetch(apiUrl);
   if (!response.ok) {
@@ -37,6 +39,22 @@ function NotFoundPage() {
 
 export default function App() {
   const { data, error, isLoading } = useSWR<ArtPiece[]>(url, fetcher);
+  const [artPiecesInfo, setArtPiecesInfo] = useState<ArtPiecesInfo[]>([]);
+
+  function handleToggleFavorite(slug: string) {
+    setArtPiecesInfo((currentInfo) => {
+      const currentPiece = currentInfo.find((piece) => piece.slug === slug);
+      if (currentPiece) {
+        return currentInfo.map((piece) =>
+          piece.slug === slug
+            ? { ...piece, isFavorite: !piece.isFavorite }
+            : piece
+        );
+      }
+
+      return [...currentInfo, { slug, isFavorite: true }];
+    });
+  }
 
   if (isLoading) return <p>Loading art pieces...</p>;
   if (error) return <p>Failed to load art pieces.</p>;
@@ -48,8 +66,26 @@ export default function App() {
         <h1>Art Gallery</h1>
 
         <Routes>
-          <Route path="/" element={<Spotlight pieces={data} />} />
-          <Route path="/art-pieces" element={<ArtPieceList artPieces={data} />} />
+          <Route
+            path="/"
+            element={
+              <Spotlight
+                pieces={data}
+                artPiecesInfo={artPiecesInfo}
+                onToggle={handleToggleFavorite}
+              />
+            }
+          />
+          <Route
+            path="/art-pieces"
+            element={
+              <ArtPieceList
+                artPieces={data}
+                artPiecesInfo={artPiecesInfo}
+                onToggle={handleToggleFavorite}
+              />
+            }
+          />
           <Route path="/favorites" element={<FavoritesPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
