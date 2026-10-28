@@ -67,7 +67,7 @@ export default function App() {
 
   return (
     <>
-      <main> 
+      <main>
         <h1>Art Gallery</h1>
 
         <Routes>
@@ -92,9 +92,17 @@ export default function App() {
             }
           />
           <Route path="/favorites" element={<FavoritesPage />} />
-          <Route path="/art-pieces/:slug" element={<ArtPieceDetails artPieces={data} />} />
+          <Route
+            path="/art-pieces/:slug"
+            element={
+              <ArtPieceDetails
+                pieces={data}
+                artPiecesInfo={artPiecesInfo}
+                onToggle={handleToggleFavorite}
+              />
+            }
+          />
           <Route path="*" element={<NotFoundPage />} />
-
         </Routes>
       </main>
       <Navigation />
