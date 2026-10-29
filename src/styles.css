@@ -311,7 +311,29 @@ nav a.active {
   border: 1px solid #c9c2b8;
   border-radius: 0.6rem;
 }
+.comment-editing{
+ display: flex;
+ 
+}
+.comment-span{
+width: 86%;
+}
+.button{
+  background-color: transparent;
+  border: 0;
+}
+.button img{
+  width: 30px;
+}
 
+.comment-input{
+  width: 85%;
+  color: #222;
+  font: inherit;
+  background: #fff;
+  border: 0;
+  border-radius: 0.6rem;
+}
 .comment-form input:focus-visible {
   outline: 3px solid rgba(34, 34, 34, 0.2);
   outline-offset: 2px;
