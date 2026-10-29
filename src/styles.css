@@ -25,17 +25,15 @@ html {
 }
 
 body {
-  
   min-width: 320px;
   min-height: 100vh;
-  
-  background:
-    radial-gradient(
-      ellipse at 50% 35%,
-      #242424 0%,
-      #171717 50%,
-      #0b0b0b 100%
-    );
+
+  background: radial-gradient(
+    ellipse at 50% 35%,
+    #242424 0%,
+    #171717 50%,
+    #0b0b0b 100%
+  );
   color: var(--ivory);
   font-size: 13px;
   line-height: 1.6;
@@ -51,7 +49,7 @@ body {
   background: transparent;
   border: 1px solid #292929;
   box-shadow: 0 18px 60px #00000066;
-} 
+}
 
 /* Subtle dark-gallery texture */
 
@@ -76,16 +74,15 @@ main {
   min-height: 780px;
   margin: 0;
   /* padding: 150px 7% 100px; */
- background:
+  background:
 /* linear-gradient(
 rgba(10, 10, 10, 0.75),
 rgba(10, 10, 10, 0.88)
-), */
-url("src/assets/Beautiful-warm.jpeg");
+), */ url("src/assets/Beautiful-warm.jpeg");
 
-background-size: cover;
-background-position: center;
-background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 /* ===== SPOTLIGHT PAGE ===== */
 
@@ -140,8 +137,6 @@ background-repeat: no-repeat;
   object-fit: contain;
   object-position: center;
   background: transparent;
-  
-  
 }
 
 /* Artist information below the painting */
@@ -173,9 +168,6 @@ background-repeat: no-repeat;
   text-transform: uppercase;
 }
 
-
-
-
 nav {
   position: absolute;
   top: 0;
@@ -189,7 +181,6 @@ nav {
   gap: 32px;
 
   padding: 30px 7%;
- 
 
   backdrop-filter: blur(10px);
 }
@@ -225,16 +216,17 @@ nav a.active {
 
   object-fit: contain;
   filter: drop-shadow(0 3px 8px rgba(212, 175, 112, 0.25));
-  transition: transform 0.3s ease, filter 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    filter 0.3s ease;
 }
-
 
 /* Gallery page */
 .art-list {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 30px;
- padding: 200px 50px;
+  padding: 200px 50px;
 }
 
 /* Individual artwork card */
@@ -244,7 +236,9 @@ nav a.active {
   border: 1px transparent;
   border-radius: 6px;
   box-shadow: 0 10px 24px rgba(0, 0, 0, 0.957);
-  transition: transform 0.3s ease, border-color 0.3s ease,
+  transition:
+    transform 0.3s ease,
+    border-color 0.3s ease,
     box-shadow 0.3s ease;
 }
 
@@ -257,8 +251,8 @@ nav a.active {
 /* Artwork image */
 .art-piece img {
   display: block;
- width: 100%;
-  height: 260px;
+  width: 100%;
+  height: 270px;
   object-fit: contain;
   border-bottom: 1px solid rgba(212, 175, 112, 0.4);
 }
@@ -268,24 +262,22 @@ nav a.active {
   color: #f5f1e8;
   text-decoration: none;
 }
-.art-piece_info{
-  background-color: rgba(20, 20, 20, 0.9) ;
+
+.art-piece_info {
+  background-color: rgba(20, 20, 20, 0.9);
 }
 .art-piece h2,
 .art-piece h3 {
   color: #d4af70;
   padding: 0 18px;
-
-  
-  
-
+  margin-top: 0;
 }
 
 .art-piece p {
   color: #d0ccc3;
-  padding: 0 18px;
+  padding: 18px;
   line-height: 1.6;
-   margin: 0;
+  margin: 0;
 }
 
 /* Artwork detail page */
@@ -381,7 +373,9 @@ nav a.active {
   border: 1px solid #d4af70;
   color: #d4af70;
   text-decoration: none;
-  transition: background 0.25s ease, color 0.25s ease;
+  transition:
+    background 0.25s ease,
+    color 0.25s ease;
 }
 
 .back-to-gallery:hover {
@@ -399,8 +393,7 @@ nav a.active {
   color: #d4af70;
 }
 
-
-.emptyphoto img{
+.emptyphoto img {
   width: 100%;
 }
 
@@ -422,8 +415,7 @@ nav a.active {
   border: 1px solid #555044;
   border-radius: 50%;
   cursor: pointer;
-  transition:
-    transform 0.25s ease;
+  transition: transform 0.25s ease;
 }
 
 .favorite-button:hover {
@@ -489,7 +481,7 @@ nav a.active {
     left: 14px;
     width: 76px;
   }
-nav {
+  nav {
     left: 0;
     justify-content: center;
     gap: 16px;
@@ -522,5 +514,4 @@ nav {
   .details-info h1 {
     font-size: 32px;
   }
-
 }

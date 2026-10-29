@@ -25,20 +25,18 @@ export function Spotlight({ pieces, artPiecesInfo, onToggle }: SpotlightProps) {
   }
 
   return (
-   
     <section className="spotlight">
-       
       <figure className="art-piece">
         <img src={spotlightPiece.imageSource} alt={spotlightPiece.name} />
-         <FavoriteButton
-            isFavorite={artPiecesInfo.some(
-              (piece) => piece.slug === spotlightPiece.slug && piece.isFavorite
-            )}
-            onToggle={() => onToggle(spotlightPiece.slug)}
-          />
+        <FavoriteButton
+          isFavorite={artPiecesInfo.some(
+            (piece) => piece.slug === spotlightPiece.slug && piece.isFavorite
+          )}
+          onToggle={() => onToggle(spotlightPiece.slug)}
+        />
         <figcaption>
           <strong>Artist:</strong> {spotlightPiece.artist}
-        
+          <strong>ArtName:</strong> {spotlightPiece.name}
         </figcaption>
       </figure>
     </section>
