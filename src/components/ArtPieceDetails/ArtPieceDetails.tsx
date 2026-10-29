@@ -18,13 +18,20 @@ export default function ArtPieceDetails({
   const artPiece = pieces.find((piece) => piece.slug === slug);
 
   if (!artPiece) {
-    return (
-      <main>
-        <p>Art Pieces are Not Founded</p>
-        <Link to="/art-pieces">Back to Gallery</Link>
-      </main>
-    );
-  }
+     return (
+    <div className="not-found-page">
+      <div className="art-piece">
+      <h2>Page not found</h2>
+      <img src="/not-found.png"
+      alt="Page not found illustration"/>
+      <p className="not-found-text"><strong>Artist:</strong> ChatDalí</p>
+      <Link to="/art-pieces" className="back-link">
+          Back to Gallery
+        </Link>
+      </div>
+    </div>
+  );
+}
 
   return (
     <main>
@@ -41,8 +48,9 @@ export default function ArtPieceDetails({
        <p>{artPiece.year}</p>
        <p>{artPiece.genre}</p>
        <ColorPalette colors={artPiece.colors}/>
-       <p>{artPiece.colors.join(", ")}</p>
-       <Link to={`/art-pieces`}>Back to Gallery</Link>
+       <Link to="/art-pieces" className="back-link">
+       Back to Gallery
+       </Link>
        </article>
     </main>
   );

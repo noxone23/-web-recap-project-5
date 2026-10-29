@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router";
+import { Routes, Route, Link } from "react-router";
 import useSWR from "swr";
 import { useState, useEffect } from "react";
 import type { ArtPiece } from "./types";
@@ -28,9 +28,11 @@ function NotFoundPage() {
       <div className="art-piece">
       <h2>Page not found</h2>
       <img src="/not-found.png"
-      alt="Page not found illustration"
-      />
+      alt="Page not found illustration"/>
       <p className="not-found-text"><strong>Artist:</strong> ChatDalí</p>
+      <Link to="/art-pieces" className="back-link">
+          Back to Gallery
+        </Link>
       </div>
     </div>
   );
