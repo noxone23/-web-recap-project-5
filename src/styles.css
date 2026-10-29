@@ -48,10 +48,10 @@ body {
   min-height: 780px;
   margin: 0 auto;
   overflow: hidden;
-  background: #151515;
+  background: transparent;
   border: 1px solid #292929;
   box-shadow: 0 18px 60px #00000066;
-}
+} 
 
 /* Subtle dark-gallery texture */
 
@@ -75,7 +75,7 @@ main {
   max-width: none;
   min-height: 780px;
   margin: 0;
-  padding: 150px 7% 100px;
+  /* padding: 150px 7% 100px; */
  background:
 /* linear-gradient(
 rgba(10, 10, 10, 0.75),
@@ -108,7 +108,7 @@ background-repeat: no-repeat;
   z-index: 1;
   width: 100%;
   max-width: 650px;
-  margin: 0;
+  margin-top: 130px;
   padding: 22px;
   overflow: visible;
   background: #77777715;
@@ -234,14 +234,14 @@ nav a.active {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 30px;
-  margin-top: 40px;
+ padding: 200px 50px;
 }
 
 /* Individual artwork card */
 .art-piece {
   overflow: hidden;
-  background: rgba(20, 20, 20, 0.9);
-  border: 1px solid rgba(212, 175, 112, 0.35);
+  background: rgba(20, 20, 20, 0.415);
+  border: 1px transparent;
   border-radius: 6px;
   box-shadow: 0 10px 24px rgba(0, 0, 0, 0.957);
   transition: transform 0.3s ease, border-color 0.3s ease,
@@ -259,7 +259,7 @@ nav a.active {
   display: block;
  width: 100%;
   height: 260px;
-  object-fit: cover;
+  object-fit: contain;
   border-bottom: 1px solid rgba(212, 175, 112, 0.4);
 }
 
@@ -268,17 +268,24 @@ nav a.active {
   color: #f5f1e8;
   text-decoration: none;
 }
-
+.art-piece_info{
+  background-color: rgba(20, 20, 20, 0.9) ;
+}
 .art-piece h2,
 .art-piece h3 {
   color: #d4af70;
   padding: 0 18px;
+
+  
+  
+
 }
 
 .art-piece p {
   color: #d0ccc3;
   padding: 0 18px;
   line-height: 1.6;
+   margin: 0;
 }
 
 /* Artwork detail page */
@@ -393,7 +400,9 @@ nav a.active {
 }
 
 
-
+.emptyphoto img{
+  width: 100%;
+}
 
 /* Favorite button */
 

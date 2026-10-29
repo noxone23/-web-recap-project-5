@@ -24,9 +24,11 @@ export default function ArtPiecePreview({
       <Link to={`/art-pieces/${artPiece.slug}`}>
         <img src={artPiece.imageSource} alt={artPiece.name} />
       </Link>
+      <div className="art-piece_info">
       <h2>{artPiece.name}</h2>
 
       <p>{artPiece.artist}</p>
+      </div>
       <FavoriteButton
         isFavorite={isFavorite}
         onToggle={() => onToggle(artPiece.slug)}
