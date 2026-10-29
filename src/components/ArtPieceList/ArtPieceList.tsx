@@ -1,6 +1,6 @@
-import type { ArtPiece } from "./types";
-import ArtPiecePreview from "./ArtPiecePreview";
-import type { ArtPiecesInfo } from "./components/FavoriteButton/ArtPiecesInfo";
+import type { ArtPiece } from "../../types";
+import ArtPiecePreview from "../ArtPiecePreview/ArtPiecePreview";
+import type { ArtPiecesInfo } from "../FavoriteButton/ArtPiecesInfo";
 
 type ArtPieceListProps = {
   artPieces: ArtPiece[];
@@ -12,6 +12,7 @@ export default function ArtPieceList({
   artPiecesInfo,
   onToggle,
 }: ArtPieceListProps) {
+  
   return (
     <ul className="art-list">
       {artPieces.map((artPiece) => (
