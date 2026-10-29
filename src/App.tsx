@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router";
 import useSWR from "swr";
 import { useState, useEffect } from "react";
-import type { ArtPiece } from "./types";
+import type { ArtPiece, Comment} from "./types";
 import "./styles.css";
 import Navigation from "./components/Navigation/Navigation";
 import ArtPieceList from "./ArtPieceList";
@@ -38,12 +38,16 @@ function NotFoundPage() {
 
 export default function App() {
   const { data, error, isLoading } = useSWR<ArtPiece[]>(url, fetcher);
+  const [comments, setComments] = useState<Comment[]>([]);
   const [artPiecesInfo, setArtPiecesInfo] = useState<ArtPiecesInfo[]>(loadArtPieceInfo);
 
   useEffect(() => {
     savedArtPieceInfo(artPiecesInfo);
   }, [artPiecesInfo]);
 
+function handleAddComment(comment: Comment){
+  setComments([...comments, comment]);
+  }
   function handleToggleFavorite(slug: string) {
     setArtPiecesInfo((currentInfo) => {
       const currentPiece = currentInfo.find((piece) => piece.slug === slug);
@@ -99,6 +103,9 @@ export default function App() {
                 pieces={data}
                 artPiecesInfo={artPiecesInfo}
                 onToggle={handleToggleFavorite}
+                comments ={comments}
+                onAddComment={handleAddComment}
+
               />
             }
           />
