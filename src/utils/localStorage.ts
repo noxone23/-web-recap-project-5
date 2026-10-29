@@ -1,5 +1,5 @@
 import type { ArtPiecesInfo } from "../components/FavoriteButton/ArtPiecesInfo";
-
+import type { Comment } from "../types";
 export function loadArtPieceInfo(): ArtPiecesInfo[] {
   // check if window is defined (safety check for server side rendering environments)
   if (typeof window === "undefined") {
@@ -23,4 +23,28 @@ export function loadArtPieceInfo(): ArtPiecesInfo[] {
 export function savedArtPieceInfo(artPiecesInfo: ArtPiecesInfo[]) {
   if (typeof window === "undefined") return;
   localStorage.setItem("art-piece-info", JSON.stringify(artPiecesInfo));
+}
+
+
+
+export function loadComments(): Comment[]{
+  if(typeof window === "undefined"){
+      return [];
+  } 
+  
+  const savedCommentState = localStorage.getItem("comments");
+  if(!savedCommentState){
+    return [];
+  }
+  try{
+    return JSON.parse(savedCommentState);
+  }
+  catch(error){
+    console.log("Failed to parse the comment from LocalStorage", error);
+    return [];
+  }
+}
+export function saveComments(comment: Comment []){
+  if (typeof window === "undefined") return;
+  localStorage.setItem("comments", JSON.stringify(comment));
 }
