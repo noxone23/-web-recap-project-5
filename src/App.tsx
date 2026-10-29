@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import type { ArtPiece, Comment} from "./types";
 import "./styles.css";
 import Navigation from "./components/Navigation/Navigation";
-import ArtPieceList from "./ArtPieceList";
+import ArtPieceList from "./components/ArtPieceList/ArtPieceList";
 import { Spotlight } from "./components/Spotlight/Spotlight";
 import { ArtPiecesInfo } from "./components/FavoriteButton/ArtPiecesInfo";
 import FavoritesPage from "./components/Favorites/FavoritesPage";

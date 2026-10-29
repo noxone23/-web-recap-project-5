@@ -1,7 +1,7 @@
-import { render, screen } from "@testing-library/react"
-import { MemoryRouter } from "react-router"
-import { Spotlight } from "./Spotlight"
-import { ArtPiece } from "../../types"
+import { render, screen } from "@testing-library/react";
+import { MemoryRouter } from "react-router";
+import { Spotlight } from "./Spotlight";
+import { ArtPiece } from "../../types";
 
 const mockPieces: ArtPiece[] = [
   {
@@ -27,11 +27,12 @@ describe("Spotlight Component", () => {
     const image = screen.getByRole("img");
     expect(image).toBeInTheDocument();
     expect(image).toHaveAttribute("alt", "Test Piece");
-    expect(image).toHaveAttribute("src", "https://test-api.vercel.app/test-piece.jpg");
-
-
+    expect(image).toHaveAttribute(
+      "src",
+      "https://test-api.vercel.app/test-piece.jpg"
+    );
 
     const artistName = screen.getByText("Unknown");
     expect(artistName).toBeInTheDocument();
-  })
-})
+  });
+});
