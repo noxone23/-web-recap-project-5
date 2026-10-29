@@ -1,4 +1,5 @@
-import { useMemo } from "react";
+import { useState, useEffect } from "react";
+import { Shuffle, Play, Pause } from "lucide-react";
 import { ArtPiece } from "../../types";
 import { ArtPiecesInfo } from "../FavoriteButton/ArtPiecesInfo";
 import FavoriteButton from "../FavoriteButton/FavoriteButton";
@@ -10,15 +11,44 @@ type SpotlightProps = {
 };
 
 export function Spotlight({ pieces, artPiecesInfo, onToggle }: SpotlightProps) {
-  // useMemo caches randomly selected art piece so it does not change on every single re-render of the component
-  // it only runs once when pieces array is loaded or updated
-  const spotlightPiece = useMemo(() => {
-    if (!pieces || pieces.length === 0) {
-      return null;
+  const [spotlightPiece, setSpotlightPiece] = useState<ArtPiece | null>(null);
+  const [isAutoPlaying, setIsAutoPlaying] = useState<boolean>(false);
+
+  function getRandomPiece(artPiece: ArtPiece[]) {
+    const randomIndex = Math.floor(Math.random() * artPiece.length);
+    return artPiece[randomIndex];
+  }
+
+  // random art pieces when the pieces array loads
+  useEffect(() => {
+    if (pieces && pieces.length > 0) {
+      setSpotlightPiece(getRandomPiece(pieces));
     }
-    const randomIndex = Math.floor(Math.random() * pieces.length);
-    return pieces[randomIndex];
   }, [pieces]);
+
+  // random shuffle button
+  function handleShuffle() {
+    if (pieces && pieces.length > 0) {
+      let nextPiece = getRandomPiece(pieces);
+
+      // it prevents that not the same index is chosen
+      while (pieces.length > 1 && nextPiece?.slug === spotlightPiece?.slug) {
+        nextPiece = getRandomPiece(pieces);
+      }
+      setSpotlightPiece(nextPiece);
+    }
+  }
+
+  // auto slide show timer
+  useEffect(() => {
+    if (!isAutoPlaying) return;
+
+    const intervalId = setInterval(() => {
+      handleShuffle();
+    }, 8000);
+
+    return () => clearInterval(intervalId);
+  }, [isAutoPlaying, pieces, spotlightPiece]);
 
   if (!spotlightPiece) {
     return <p>No art piece found!</p>;
@@ -38,6 +68,35 @@ export function Spotlight({ pieces, artPiecesInfo, onToggle }: SpotlightProps) {
           />
         </figcaption>
       </figure>
+
+      {/* random shuffle button */}
+      <div className="spotlight-controls">
+        <button
+          type="button"
+          onClick={handleShuffle}
+          className="shuffle-button"
+        >
+          <Shuffle size={18} /> Shuffle
+        </button>
+
+        {/* auto slide show toggle */}
+        <button
+          type="button"
+          onClick={() => setIsAutoPlaying((prev) => !prev)}
+          className="slideshow-toggle"
+          title="Auto playing every 8s"
+        >
+          {isAutoPlaying ? (
+            <>
+              <Pause size={18} /> Pause
+            </>
+          ) : (
+            <>
+              <Play size={18} /> Slideshow
+            </>
+          )}
+        </button>
+      </div>
     </section>
   );
 }
