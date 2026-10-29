@@ -106,7 +106,9 @@ export default function ArtPieceDetails({
           
 
        </form>
-       <Link to={`/art-pieces`}>Back to Gallery</Link>
+       <Link to="/art-pieces" className="back-link">
+       Back to Gallery
+       </Link>
        </article>
     </main>
   );
