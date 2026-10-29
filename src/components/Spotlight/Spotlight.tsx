@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+
 import { Shuffle, Play, Pause } from "lucide-react";
 import { ArtPiece } from "../../types";
 import { ArtPiecesInfo } from "../FavoriteButton/ArtPiecesInfo";
@@ -11,6 +12,24 @@ type SpotlightProps = {
 };
 
 export function Spotlight({ pieces, artPiecesInfo, onToggle }: SpotlightProps) {
+  //spinning wheel
+  const [isSpinning, setIsSpinning] = useState(false);
+  function handleRoulette() {
+    if (isSpinning || pieces.length === 0) return;
+
+    let winner = getRandomPiece(pieces);
+
+    while (pieces.length > 1 && winner.slug === spotlightPiece?.slug) {
+      winner = getRandomPiece(pieces);
+    }
+    setIsSpinning(true);
+
+    setTimeout(() => {
+      setSpotlightPiece(winner);
+      setIsSpinning(false);
+    }, 2500);
+  }
+
   const [spotlightPiece, setSpotlightPiece] = useState<ArtPiece | null>(null);
   const [isAutoPlaying, setIsAutoPlaying] = useState<boolean>(false);
 
@@ -56,27 +75,51 @@ export function Spotlight({ pieces, artPiecesInfo, onToggle }: SpotlightProps) {
 
   return (
     <section className="spotlight">
-      <figure className="art-piece">
-        <img src={spotlightPiece.imageSource} alt={spotlightPiece.name} />
-        <figcaption>
-          <strong>Artist:</strong> {spotlightPiece.artist}
-          <FavoriteButton
-            isFavorite={artPiecesInfo.some(
-              (piece) => piece.slug === spotlightPiece.slug && piece.isFavorite
-            )}
-            onToggle={() => onToggle(spotlightPiece.slug)}
-          />
-        </figcaption>
-      </figure>
+      {isSpinning ? (
+        <div className="roulette-stage">
+          <div className="roulette-pointer" />
+          <div className="roulette-wheel">
+            {pieces.map((piece, index) => {
+              const angle = (360 / pieces.length) * index;
 
+              return (
+                <div
+                  key={piece.slug}
+                  className="roulette-item"
+                  style={{
+                    transform: `rotate(${angle}deg) translateY(-210px) rotate(${-angle}deg)`,
+                  }}
+                >
+                  <img src={piece.imageSource} alt={piece.name} />
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      ) : (
+        <figure className="art-piece">
+          <img src={spotlightPiece.imageSource} alt={spotlightPiece.name} />
+          <figcaption>
+            <strong>Artist:</strong> {spotlightPiece.artist}
+            <FavoriteButton
+              isFavorite={artPiecesInfo.some(
+                (piece) =>
+                  piece.slug === spotlightPiece.slug && piece.isFavorite
+              )}
+              onToggle={() => onToggle(spotlightPiece.slug)}
+            />
+          </figcaption>
+        </figure>
+      )}
       {/* random shuffle button */}
       <div className="spotlight-controls">
         <button
           type="button"
-          onClick={handleShuffle}
+          onClick={handleRoulette}
           className="shuffle-button"
+          disabled={isSpinning}
         >
-          <Shuffle size={18} /> Shuffle
+          <Shuffle size={18} /> {isSpinning ? " Spinning..." : "Shuffle"}
         </button>
 
         {/* auto slide show toggle */}
