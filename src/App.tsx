@@ -9,6 +9,7 @@ import { Spotlight } from "./components/Spotlight/Spotlight";
 import { ArtPiecesInfo } from "./components/FavoriteButton/ArtPiecesInfo";
 import FavoritesPage from "./components/Favorites/FavoritesPage";
 import ArtPieceDetails from "./components/ArtPieceDetails/ArtPieceDetails";
+import YellowSpotlight from "../src/assets/Yellow-Spotlight.jpeg"
 
 const url = "https://example-apis.vercel.app/api/art";
 
@@ -53,12 +54,14 @@ export default function App() {
   if (error) return <p>Failed to load art pieces.</p>;
   if (!data) return null;
 
-  const favoritePieces = data.filter((artPiece) => artPiecesInfo.some((info) => info.slug === artPiece.slug && info.isFavorite));
+  const favoritePieces = data.filter((artPiece) =>
+    artPiecesInfo.some((info) => info.slug === artPiece.slug && info.isFavorite)
+  );
 
   return (
     <>
       <main>
-        <h1>Art Gallery</h1>
+       
         <Routes>
           <Route
             path="/"
@@ -80,8 +83,16 @@ export default function App() {
               />
             }
           />
-          <Route path="/favorites" element={<FavoritesPage favoritePieces={favoritePieces} artPiecesInfo={artPiecesInfo}
-      onToggle={handleToggleFavorite} />} />
+          <Route
+            path="/favorites"
+            element={
+              <FavoritesPage
+                favoritePieces={favoritePieces}
+                artPiecesInfo={artPiecesInfo}
+                onToggle={handleToggleFavorite}
+              />
+            }
+          />
           <Route
             path="/art-pieces/:slug"
             element={

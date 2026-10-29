@@ -13,16 +13,16 @@ export default function ArtPieceList({
   onToggle,
 }: ArtPieceListProps) {
   return (
-    <ul className="art-list">
+    <section className="art-list">
       {artPieces.map((artPiece) => (
-        <li key={artPiece.slug}>
+        <a key={artPiece.slug}>
           <ArtPiecePreview
             artPiece={artPiece}
             artPiecesInfo={artPiecesInfo}
             onToggle={onToggle}
           />
-        </li>
+        </a>
       ))}
-    </ul>
+    </section>
   );
 }
