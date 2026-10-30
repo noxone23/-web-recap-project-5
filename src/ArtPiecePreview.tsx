@@ -1,4 +1,4 @@
-import type { ArtPiece } from "./types";
+import { ArtPiece } from "./types";
 
 import { Link } from "react-router";
 
