@@ -37,6 +37,16 @@ body {
   color: var(--ivory);
   font-size: 13px;
   line-height: 1.6;
+  overflow-y: scroll; 
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+  line-height: 1.5;
+  color: #222;
+  background: #f6f4ef;
+  padding-left: calc(100vw - 100%);
 }
 
 #root {
