@@ -45,3 +45,4 @@ await user.click(galleryLink);
 
 expect(galleryLink).toHaveAttribute("aria-current", "page");
 });
+/*fix*/
