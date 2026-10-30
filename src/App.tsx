@@ -100,7 +100,7 @@ export default function App() {
   return (
     <>
       <main>
-        <h1>Art Gallery</h1>
+        
         <Routes>
           <Route
             path="/"

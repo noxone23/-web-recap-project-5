@@ -1,4 +1,4 @@
-export type ArtPiecesInfo ={
-    slug: string;
-    isFavorite: boolean;
+export type ArtPiecesInfo = {
+  slug: string;
+  isFavorite: boolean;
 };

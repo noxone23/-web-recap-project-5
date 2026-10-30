@@ -8,10 +8,27 @@ type FavoritesPageProps = {
   onToggle: (slug: string) => void;
 };
 
-export default function FavoritesPage({ favoritePieces, artPiecesInfo, onToggle }: FavoritesPageProps) {
+export default function FavoritesPage({
+  favoritePieces,
+  artPiecesInfo,
+  onToggle,
+}: FavoritesPageProps) {
   return (
+  
     <div>
-      {favoritePieces.length === 0 ? (<p>No favorite art pieces yet.</p>) : <ArtPieceList artPieces={favoritePieces} artPiecesInfo={artPiecesInfo} onToggle={onToggle} />}
+      
+      {favoritePieces.length === 0 ? (
+        <div className="emptyphoto">
+        
+        </div>
+      ) : (
+        <ArtPieceList
+          artPieces={favoritePieces}
+          artPiecesInfo={artPiecesInfo}
+          onToggle={onToggle}
+        />
+      )}
     </div>
+    
   );
 }
