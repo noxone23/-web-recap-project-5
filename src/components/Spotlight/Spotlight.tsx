@@ -88,7 +88,7 @@ export function Spotlight({ pieces, artPiecesInfo, onToggle }: SpotlightProps) {
                   key={piece.slug}
                   className="roulette-item"
                   style={{
-                    transform: `rotate(${angle}deg) translateY(-210px) rotate(${-angle}deg)`,
+                    transform: `rotate(${angle}deg) translateY(-220px) rotate(${-angle}deg)`,
                   }}
                 >
                   <img src={piece.imageSource} alt={piece.name} />
@@ -99,49 +99,6 @@ export function Spotlight({ pieces, artPiecesInfo, onToggle }: SpotlightProps) {
         </div>
       ) : (
         <figure className="art-piece">
-          <img src={spotlightPiece.imageSource} alt={spotlightPiece.name} />
-          <figcaption>
-            <strong>Artist:</strong> {spotlightPiece.artist}
-            <FavoriteButton
-              isFavorite={artPiecesInfo.some(
-                (piece) =>
-                  piece.slug === spotlightPiece.slug && piece.isFavorite
-              )}
-              onToggle={() => onToggle(spotlightPiece.slug)}
-            />
-          </figcaption>
-        </figure>
-      )}
-      {/* random shuffle button */}
-      <div className="spotlight-controls">
-        <button
-          type="button"
-          onClick={handleRoulette}
-          className="shuffle-button"
-          disabled={isSpinning}
-        >
-          <Shuffle size={18} /> {isSpinning ? " Spinning..." : "Shuffle"}
-        </button>
-
-        {/* auto slide show toggle */}
-        <button
-          type="button"
-          onClick={() => setIsAutoPlaying((prev) => !prev)}
-          className="slideshow-toggle"
-          title="Auto playing every 8s"
-        >
-          {isAutoPlaying ? (
-            <>
-              <Pause size={18} /> Pause
-            </>
-          ) : (
-            <>
-              <Play size={18} /> Slideshow
-            </>
-          )}
-        </button>
-      </div>
-      <figure className="art-piece">
         <img src={spotlightPiece.imageSource} alt={spotlightPiece.name} />
         <FavoriteButton
           isFavorite={artPiecesInfo.some(
@@ -154,6 +111,44 @@ export function Spotlight({ pieces, artPiecesInfo, onToggle }: SpotlightProps) {
           <strong>ArtName:</strong> {spotlightPiece.name}
         </figcaption>
       </figure>
+      )}
+      {/* random shuffle button */}
+ 
+<div className="spotlight-controls">
+    <button
+        type="button"
+        onClick={handleRoulette}
+        className="spotlight-button shuffle-button"
+        disabled={isSpinning}
+    >
+        <Shuffle size={18} />
+        <span>{isSpinning ? "Spinning..." : "Shuffle Artwork"}</span>
+    </button>
+
+    <button
+        type="button"
+        onClick={() => setIsAutoPlaying((prev) => !prev)}
+        className={`spotlight-button slideshow-toggle ${
+            isAutoPlaying ? "playing" : ""
+        }`}
+        title="Automatically change artwork every 8 seconds"
+        aria-pressed={isAutoPlaying}
+    >
+        {isAutoPlaying ? (
+            <>
+                <Pause size={18} />
+                <span>Pause Slideshow</span>
+            </>
+        ) : (
+            <>
+                <Play size={18} />
+                <span>Start Slideshow</span>
+            </>
+        )}
+    </button>
+</div>
+
+     
     </section>
   );
 }

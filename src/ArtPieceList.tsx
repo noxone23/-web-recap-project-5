@@ -14,15 +14,14 @@ export default function ArtPieceList({
 }: ArtPieceListProps) {
   return (
     <section className="art-list">
-      {artPieces.map((artPiece) => (
-        <a key={artPiece.slug}>
-          <ArtPiecePreview
-            artPiece={artPiece}
-            artPiecesInfo={artPiecesInfo}
-            onToggle={onToggle}
-          />
-        </a>
-      ))}
-    </section>
+  {artPieces.map((artPiece) => (
+    <ArtPiecePreview
+      key={artPiece.slug}
+      artPiece={artPiece}
+      artPiecesInfo={artPiecesInfo}
+      onToggle={onToggle}
+    />
+  ))}
+</section>
   );
 }
