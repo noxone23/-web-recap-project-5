@@ -4,6 +4,11 @@
   box-sizing: border-box;
 }
 
+html {
+  scrollbar-gutter: stable both-edges;
+  overflow-y: scroll;
+}
+
 body {
   margin: 0;
   font-family: system-ui, sans-serif;
@@ -403,7 +408,29 @@ nav a.active {
   border: 1px solid #c9c2b8;
   border-radius: 0.6rem;
 }
+.comment-editing{
+ display: flex;
+ 
+}
+.comment-span{
+width: 86%;
+}
+.button{
+  background-color: transparent;
+  border: 0;
+}
+.button img{
+  width: 30px;
+}
 
+.comment-input{
+  width: 85%;
+  color: #222;
+  font: inherit;
+  background: #fff;
+  border: 0;
+  border-radius: 0.6rem;
+}
 .comment-form input:focus-visible {
   outline: 3px solid rgba(34, 34, 34, 0.2);
   outline-offset: 2px;
@@ -457,3 +484,159 @@ nav a.active {
 .back-link:active {
   transform: scale(0.97);
 }
+
+/*----------FilterBar----------*/
+
+.filter-bar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+  width: 100%;
+}
+
+.filter-inputs-row {
+ display: flex;
+ flex-wrap: wrap;
+ gap: 1rem;
+ width: 100%;
+ max-width: 48rem;
+ justify-content: center;
+}
+
+.filter-search {
+  flex: 2;
+  min-width: 15rem;
+  padding: 0.75rem 1.2rem;
+  font-size: 0.95rem;
+  border: 1px solid #ccc;
+  border-radius: 2rem;
+  background-color: #ffffff;
+  color: #222;
+  outline: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+  transition: border-color 0.2 ease, box-shadow 0.2 ease;
+}
+
+.filter-select {
+  flex: 1;
+  min-width: 10rem;
+  padding: 0.75rem 2.5rem 0.75rem 1.2rem;
+  font-size: 0.95rem;
+  font-family: inherit;
+  border: 1px solid #ccc;
+  border-radius: 2rem;
+  background-color: #ffffff;
+  color: #222;
+  cursor: pointer;
+  outline: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 4 5'><path fill='gray' d='M2 5L0 2h4z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 1.2rem center;
+  background-size: 0.65rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.filter-search:focus
+.filter-select:focus {
+  border-color: #666;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+}
+
+
+/*----------FilterColors----------*/
+
+.filter-colors-row {
+  display: flex;
+  gap: 0.6rem;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 1.2rem;
+  background-color: #ffffff;
+  padding: 0.6rem 0 0.6rem 0; 
+  border-radius: 2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+  border: 1px solid #ccc;
+  max-width: 48rem;
+  width: 100%;
+  overflow-x: auto;
+  white-space: nowrap;
+  scrollbar-width: none;
+}
+
+.filter-colors-row::-webkit-scrollbar {
+  display: none;
+}
+
+.filter-color-bubble {
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  cursor: pointer;
+  padding: 0;
+  transition: transform 0.15s ease;
+  flex-shrink: 0; 
+}
+
+.filter-color-bubble:hover {
+  transform: scale(1.2);
+}
+
+.filter-color-bubble.active {
+  border: 2px solid #222;
+  box-shadow: 0 0 0 2px #fff;
+  transform: scale(1.1);
+}
+
+.clear-color-btn {
+  background: none;
+  border: none;
+  color: #d6336c;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: bold;
+  padding: 0.25rem 0.5rem;
+  flex-shrink: 0;
+  position: sticky;
+  right: 0;
+  background: radial-gradient(circle at 0% 50%, transparent 0.85rem, #ffffff 0.9rem);
+  padding: 0.6rem 1.5rem 0.6rem 2.2rem;
+  margin-top: -0.6rem;
+  margin-bottom: -0.6rem;
+  z-index: 2;
+  border-top-right-radius: 2rem;
+  border-bottom-right-radius: 2rem;
+  box-shadow: none; 
+}
+
+.filter-color-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #666;
+  position: sticky;
+  left: 0;
+  background-color: #ffffff;
+  padding-left: 1.5rem; 
+  padding-right: 2.2rem; 
+  border-top-left-radius: 2rem;
+  border-bottom-left-radius: 2rem;
+  margin-top: -0.6rem;
+  margin-bottom: -0.6rem;
+  padding-top: 0.6rem;
+  padding-bottom: 0.6rem;
+  z-index: 2;
+  background: radial-gradient(circle at 100% 50%, transparent 0.85rem, #ffffff 0.9rem);
+}
+
+.search-no-results {
+  text-align: center;
+  color: #666;
+  margin-top: 2rem;
+  font-size: 1.1rem;
+} 

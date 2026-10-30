@@ -13,6 +13,7 @@ export type ArtPiece ={
     }
 }
 export type Comment ={
+    id: string;
     slug: string;
     text: string;
     date: string;
