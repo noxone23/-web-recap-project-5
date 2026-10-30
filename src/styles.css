@@ -4,11 +4,6 @@
   box-sizing: border-box;
 }
 
-html {
-  scrollbar-gutter: stable both-edges;
-  overflow-y: scroll;
-}
-
 body {
   margin: 0;
   font-family: system-ui, sans-serif;
