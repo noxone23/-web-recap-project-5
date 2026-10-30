@@ -38,7 +38,7 @@ export default function ArtPieceDetails({
     return;
   }
 
-    const comment: Comment = {
+     const comment: Comment = {
       text: newComment,
       date : new Date().toLocaleDateString("de-DE"),
       slug : slug,

@@ -8,7 +8,7 @@ export default function Navigation() {
             </NavLink>
 
              <NavLink to="/art-pieces">
-            Gallery
+            Art Pieces
             </NavLink>
 
              <NavLink to="/favorites">

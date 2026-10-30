@@ -1,5 +1,5 @@
 import type { ArtPiece } from "../../types";
-import ArtPieceList from "../../ArtPieceList";
+import ArtPieceList from "../ArtPieceList/ArtPieceList";
 import type { ArtPiecesInfo } from "../FavoriteButton/ArtPiecesInfo";
 
 type FavoritesPageProps = {

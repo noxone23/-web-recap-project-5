@@ -4,12 +4,12 @@ import { useState, useEffect } from "react";
 import type { ArtPiece, Comment} from "./types";
 import "./styles.css";
 import Navigation from "./components/Navigation/Navigation";
-import ArtPieceList from "./ArtPieceList";
+import ArtPieceList from "./components/ArtPieceList/ArtPieceList";
 import { Spotlight } from "./components/Spotlight/Spotlight";
 import { ArtPiecesInfo } from "./components/FavoriteButton/ArtPiecesInfo";
 import FavoritesPage from "./components/Favorites/FavoritesPage";
 import ArtPieceDetails from "./components/ArtPieceDetails/ArtPieceDetails";
-import { loadArtPieceInfo, savedArtPieceInfo } from "./utils/localStorage";
+import { loadArtPieceInfo, savedArtPieceInfo, loadComments, saveComments} from "./utils/localStorage";
 
 const url = "https://example-apis.vercel.app/api/art";
 
@@ -40,13 +40,16 @@ function NotFoundPage() {
 
 export default function App() {
   const { data, error, isLoading } = useSWR<ArtPiece[]>(url, fetcher);
-  const [comments, setComments] = useState<Comment[]>([]);
+  const [comments, setComments] = useState<Comment[]>(loadComments);
   const [artPiecesInfo, setArtPiecesInfo] = useState<ArtPiecesInfo[]>(loadArtPieceInfo);
 
   useEffect(() => {
     savedArtPieceInfo(artPiecesInfo);
   }, [artPiecesInfo]);
-
+  useEffect(() => {
+    saveComments(comments);
+  },[comments]);
+  
 function handleAddComment(comment: Comment){
   setComments([...comments, comment]);
   }

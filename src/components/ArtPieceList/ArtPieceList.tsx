@@ -1,8 +1,8 @@
 import { useState } from "react";
-import type { ArtPiece } from "./types";
-import ArtPiecePreview from "./ArtPiecePreview";
-import type { ArtPiecesInfo } from "./components/FavoriteButton/ArtPiecesInfo";
-import SearchBar from "./components/SearchBar/SearchBar";
+import type { ArtPiece } from "../../types";
+import ArtPiecePreview from "../ArtPiecePreview/ArtPiecePreview";
+import type { ArtPiecesInfo } from "../FavoriteButton/ArtPiecesInfo";
+import SearchBar from "../SearchBar/SearchBar";
 
 type ArtPieceListProps = {
   artPieces: ArtPiece[];
@@ -41,6 +41,7 @@ const sortedAndilteredPieces = [...filteredPieces].sort((a, b) => {
   return 0;
 });
 
+  
 return (
   <div>
     <SearchBar 
