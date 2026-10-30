@@ -1,7 +1,7 @@
 import { Routes, Route, Link } from "react-router";
 import useSWR from "swr";
 import { useState, useEffect } from "react";
-import type { ArtPiece, Comment} from "./types";
+import type { ArtPiece, Comment } from "./types";
 import "./styles.css";
 import Navigation from "./components/Navigation/Navigation";
 import ArtPieceList from "./components/ArtPieceList/ArtPieceList";
@@ -9,7 +9,12 @@ import { Spotlight } from "./components/Spotlight/Spotlight";
 import { ArtPiecesInfo } from "./components/FavoriteButton/ArtPiecesInfo";
 import FavoritesPage from "./components/Favorites/FavoritesPage";
 import ArtPieceDetails from "./components/ArtPieceDetails/ArtPieceDetails";
-import { loadArtPieceInfo, savedArtPieceInfo, loadComments, saveComments} from "./utils/localStorage";
+import {
+  loadArtPieceInfo,
+  savedArtPieceInfo,
+  loadComments,
+  saveComments,
+} from "./utils/localStorage";
 
 const url = "https://example-apis.vercel.app/api/art";
 
@@ -26,11 +31,12 @@ function NotFoundPage() {
   return (
     <div className="not-found-page">
       <div className="art-piece">
-      <h2>Page not found</h2>
-      <img src="/not-found.png"
-      alt="Page not found illustration"/>
-      <p className="not-found-text"><strong>Artist:</strong> ChatDalí</p>
-      <Link to="/art-pieces" className="back-link">
+        <h2>Page not found</h2>
+        <img src="/not-found.png" alt="Page not found illustration" />
+        <p className="not-found-text">
+          <strong>Artist:</strong> ChatDalí
+        </p>
+        <Link to="/art-pieces" className="back-link">
           Back to Gallery
         </Link>
       </div>
@@ -41,18 +47,33 @@ function NotFoundPage() {
 export default function App() {
   const { data, error, isLoading } = useSWR<ArtPiece[]>(url, fetcher);
   const [comments, setComments] = useState<Comment[]>(loadComments);
-  const [artPiecesInfo, setArtPiecesInfo] = useState<ArtPiecesInfo[]>(loadArtPieceInfo);
+  const [artPiecesInfo, setArtPiecesInfo] =
+    useState<ArtPiecesInfo[]>(loadArtPieceInfo);
 
   useEffect(() => {
     savedArtPieceInfo(artPiecesInfo);
   }, [artPiecesInfo]);
   useEffect(() => {
     saveComments(comments);
-  },[comments]);
-  
-function handleAddComment(comment: Comment){
-  setComments([...comments, comment]);
+  }, [comments]);
+
+  function handleAddComment(comment: Comment) {
+    setComments([...comments, comment]);
   }
+  function handleEditComment(id: string, updateText: string) {
+    setComments((currentComments) =>
+      currentComments.map((comment) =>
+        (comment as Comment & { id?: string | number }).id === id
+          ? { ...comment, text: updateText }
+          : comment
+      )
+    );
+  }
+  function handleDeleteComment(id: string) {
+  setComments((currentComments) =>
+    currentComments.filter((comment) => comment.id !== id)
+  );
+}
   function handleToggleFavorite(slug: string) {
     setArtPiecesInfo((currentInfo) => {
       const currentPiece = currentInfo.find((piece) => piece.slug === slug);
@@ -72,7 +93,9 @@ function handleAddComment(comment: Comment){
   if (error) return <p>Failed to load art pieces.</p>;
   if (!data) return null;
 
-  const favoritePieces = data.filter((artPiece) => artPiecesInfo.some((info) => info.slug === artPiece.slug && info.isFavorite));
+  const favoritePieces = data.filter((artPiece) =>
+    artPiecesInfo.some((info) => info.slug === artPiece.slug && info.isFavorite)
+  );
 
   return (
     <>
@@ -99,8 +122,16 @@ function handleAddComment(comment: Comment){
               />
             }
           />
-          <Route path="/favorites" element={<FavoritesPage favoritePieces={favoritePieces} artPiecesInfo={artPiecesInfo}
-      onToggle={handleToggleFavorite} />} />
+          <Route
+            path="/favorites"
+            element={
+              <FavoritesPage
+                favoritePieces={favoritePieces}
+                artPiecesInfo={artPiecesInfo}
+                onToggle={handleToggleFavorite}
+              />
+            }
+          />
           <Route
             path="/art-pieces/:slug"
             element={
@@ -108,9 +139,10 @@ function handleAddComment(comment: Comment){
                 pieces={data}
                 artPiecesInfo={artPiecesInfo}
                 onToggle={handleToggleFavorite}
-                comments ={comments}
+                comments={comments}
                 onAddComment={handleAddComment}
-
+                onEditComment={handleEditComment}
+                onDeleteComment={handleDeleteComment}
               />
             }
           />
